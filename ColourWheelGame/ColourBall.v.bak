@@ -1,0 +1,319 @@
+// KEY[0] resetn
+// KEY[1] the filled square should be drawn when it is pressed
+// SW[9:7] used for colour
+//update vga sync and blank stuff 
+//remake new folder with all design parts
+//implement gameEn into counters //might not need it
+//assign colour in datapath into ycounter
+//add gameneable to outc counter
+//colsel might need fixing if colours arent changing //memory depth might be messed
+
+
+module ColourBall
+	(
+		CLOCK_50,						//	On Board 50 MHz
+		// Your inputs and outputs here
+        KEY,
+        SW,
+		HEX0,
+		HEX1,	
+		HEX4,
+		HEX5,
+		// The ports below are for the VGA output.  Do not change.
+		VGA_CLK,   						//	VGA Clock
+		VGA_HS,							//	VGA H_SYNC
+		VGA_VS,							//	VGA V_SYNC
+		VGA_BLANK_N,						//	VGA BLANK
+		VGA_SYNC_N,						//	VGA SYNC
+		VGA_R,   						//	VGA Red[9:0]
+		VGA_G,	 						//	VGA Green[9:0]
+		VGA_B   						//	VGA Blue[9:0]
+	);
+
+	input			CLOCK_50;				//	50 MHz
+	input   [9:0]   SW;
+	input   [3:0]   KEY;
+
+	// Declare your inputs and outputs here
+	output 	[6:0]			HEX0, HEX1, HEX4, HEX5;
+	// Do not change the following outputs
+	output			VGA_CLK;   				//	VGA Clock
+	output			VGA_HS;					//	VGA H_SYNC
+	output			VGA_VS;					//	VGA V_SYNC
+	output			VGA_BLANK_N;				//	VGA BLANK
+	output			VGA_SYNC_N;				//	VGA SYNC
+	output	[9:0]	VGA_R;   				//	VGA Red[9:0]
+	output	[9:0]	VGA_G;	 				//	VGA Green[9:0]
+	output	[9:0]	VGA_B;   				//	VGA Blue[9:0]
+	
+	wire resetn;
+	assign resetn = KEY[0];
+	
+	// Create the colour, x, y and writeEn wires that are inputs to the controller.
+
+	wire [2:0] colour;
+	wire [7:0] x;
+	wire [6:0] y;
+	wire writeEn;
+
+	// Create an Instance of a VGA controller - there can be only one!		
+	// Define the number of colours as well as the initial background
+	// image file (.MIF) for the controller.
+	vga_adapter VGA(
+			.resetn(resetn),
+			.clock(CLOCK_50),
+			.colour(colour),
+			.x(x),
+			.y(y),
+			.plot(writeEn),
+			/* Signals for the DAC to drive the monitor. */
+			.VGA_R(VGA_R),
+			.VGA_G(VGA_G),
+			.VGA_B(VGA_B),
+			.VGA_HS(VGA_HS),
+			.VGA_VS(VGA_VS),
+			.VGA_BLANK(VGA_BLANK_N),
+			.VGA_SYNC(VGA_SYNC_N),
+			.VGA_CLK(VGA_CLK));
+		defparam VGA.RESOLUTION = "160x120";
+		defparam VGA.MONOCHROME = "FALSE";
+		defparam VGA.BITS_PER_COLOUR_CHANNEL = 1;
+		defparam VGA.BACKGROUND_IMAGE = "black.mif";
+			
+	// Put your code here. Your code should produce signals x,y,colour and writeEn	
+	// for the VGA controller, in addition to any other functionality your design may require.
+    
+	wire [3:0]counvalue;
+	wire [6:0]count_y_val;
+	wire [7:0]count_x_val;
+	wire enableyc, enablec, enableRDiv, colourselect, resetA, enablefifF, gameEn;
+	wire [4:0]fifteen_fram;
+	wire [6:0]y_counterVale;
+	wire [7:0]x_counterVale;
+	wire resetWA;
+	wire [14:0] addg, addb, addy, addr; 
+	wire [2:0] colg, colb, coly, colr, ballC_; 
+	wire gen, yen, ren, ben, newBallColEn;
+	wire bdone, ydone, rdone, gdone;
+	wire [6:0] yb, yg, yy, yr;
+	wire [7:0] xb, xg, xy, xr;
+	wire [3:0] score1, score2, hscore1, hscore2; 
+	
+	
+	//Memory instanstiaton
+	blue blue_inst(addb, CLOCK_50, colb);
+	green green_inst(addg, CLOCK_50, colg);
+	red red_inst (addr, CLOCK_50, colr);
+	yellow yellow_inst(addy, CLOCK_50, coly);
+	
+	//load wheels
+	loadWheel wheelb (CLOCK_50, ben, xb, yb, addb, bdone);
+	loadWheel wheelg (CLOCK_50, gen, xg, yg, addg, gdone);
+	loadWheel wheelr (CLOCK_50, ren, xr, yr, addr, rdone);
+	loadWheel wheely (CLOCK_50, yen, xy, yy, addy, ydone);
+    
+	 // Instanciate datapath
+	 datapath (SW, enablexc, enableyc,enablec, enableRDiv, colourselect,resetn,
+						x, y, colour,CLOCK_50,resetA, fifteen_fram, x_counterVale, 
+						y_counterVale,enablefifF,resetWA, ben, gen, yen, ren,
+						colb, colr, coly, colg, xr, xy, xb, xg, yr, yy, yb, yg, bdone, ydone, rdone, gdone, gameEn, ballC_, newBallColEn);
+	 
+    // Instanciate FSM control
+	fsm (KEY[1], counvalue, fifteen_fram, x_counterVale, y_counterVale,
+				enablexc, enableyc, enablec, colourselect, enableRDiv, enablefifF, resetA, resetn,
+				CLOCK_50,writeEn,resetWA, KEY[3], KEY[2], bdone, ydone, rdone, gdone, xb, xg, xy, xr, 
+				yb, yg, yy, yr, gen, yen, ren, ben, score1, score2, hscore1, hscore2, gameEn, x, y, ballC_, newBallColEn);
+	 
+	 hex_display s1(score1, HEX1);
+	 hex_display s2(score2, HEX0);
+	 hex_display hs1(hscore1, HEX5);
+	 hex_display hs2(hscore2, HEX4);
+endmodule
+
+module loadWheel (clk, enable, xCount, yCount, address, done);
+	input clk;
+	input enable;
+	output reg done;
+	output reg [7:0]xCount;
+	output reg [8:0]yCount;
+	output reg [9:0]address;	
+	
+	initial begin
+	xCount = 0; 
+	yCount = 7'b1010000; 
+	address = 72; //change? adress was changed from 2 to 72
+	done = 1'b1;
+	end
+	
+	always @ (posedge clk)
+	begin
+	if (enable) begin
+		if (xCount < 8'd159) //159
+				xCount <= xCount +1;
+				if (yCount == 7'd119) done<=1; 
+		else if (xCount == 8'd159) begin
+			if (yCount < 7'd119) begin
+				xCount <= 0;
+				yCount <= yCount+1;
+				end
+			end
+		address <= address+1'b1;
+		end
+	else begin 
+		done <= 0; 
+		xCount = 0;
+		yCount = 7'b1010000;
+		address = 72;
+		end
+	end
+	
+endmodule
+
+
+module hex_display(in, hexOut);
+	/* Sets 7-segment display for hex output */
+
+  input [3:0] in;
+  output reg [6:0] hexOut;
+  
+  always @(in)
+    case (in)
+      4'h0: hexOut = 7'b1000000;
+      4'h1: hexOut = 7'b1111001;
+      4'h2: hexOut = 7'b0100100;
+      4'h3: hexOut = 7'b0110000;
+      4'h4: hexOut = 7'b0011001;
+      4'h5: hexOut = 7'b0010010;
+      4'h6: hexOut = 7'b0000010;
+      4'h7: hexOut = 7'b1111000;
+      4'h8: hexOut = 7'b0000000;
+      4'h9: hexOut = 7'b0011000;
+      default: hexOut = 7'b1000000;
+    endcase
+endmodule
+
+module random_number_lfsr_4bit( //generates random numbers 0-15
+  input clock,
+  input resetn,
+
+  output reg [3:0] data
+);
+
+reg [3:0] data_next;
+
+always @* begin
+  data_next[3] = data[3]^data[0];
+  data_next[2] = data[2]^data[3];
+  data_next[1] = data[1]^data_next[3];
+  data_next[0] = data[0]^data_next[2];
+  data_next[3] = data[3]^data_next[1];
+end
+
+always @(posedge clock)
+  if(resetn)
+    data <= 4'h1f;
+  else
+    data <= data_next;
+
+endmodule
+
+module random_colour(clock, resetn, randNum, pickCol, enable);
+input clock, resetn, enable;
+input [3:0] randNum;
+output reg [2:0] pickCol;
+
+always@(*)
+	begin
+	case(randNum)
+	
+	4'b0000:
+	begin
+	pickCol = 3'b100; //red
+	end
+
+	4'b0001:
+	begin
+	pickCol = 3'b100;
+	end
+	
+	4'b0010:
+	begin
+	pickCol = 3'b100;
+	end
+	
+	4'b0011:
+	begin
+	pickCol = 3'b100; 
+	end
+	
+	4'b0100:
+	begin
+	pickCol = 3'b001; //blue
+	end
+	
+	4'b0101:
+	begin
+	pickCol = 3'b001;
+	end
+	
+	4'b0110:
+	begin
+	pickCol = 3'b001;
+	end
+	
+	4'b0111:
+	begin
+	pickCol = 3'b001;
+	end
+	
+	4'b1000:
+	begin
+	pickCol = 3'b110; //yellow
+	end	
+	
+	4'b1001:
+	begin
+	pickCol = 3'b110;
+	end	
+	
+	4'b1010:
+	begin
+	pickCol = 3'b110;
+	end	
+	
+	4'b1011:
+	begin
+	pickCol = 3'b110;
+	end
+	
+	4'b1100:
+	begin
+	pickCol = 3'b010; //green
+	end	
+	
+	4'b1101:
+	begin
+	pickCol = 3'b010;
+	end	
+	
+	4'b1110:
+	begin
+	pickCol = 3'b010;
+	end
+	
+	4'b1111:
+	begin
+	pickCol = 3'b010;
+	end	
+	
+	endcase
+	end
+endmodule
+
+
+
+
+
+
+
+

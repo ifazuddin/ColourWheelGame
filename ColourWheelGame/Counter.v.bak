@@ -1,0 +1,75 @@
+module ycounter (enable, resetn, clock, outy, outx, _Xr, _Xy, _Xb, _Xg, _Yr, _Yy, _Yb, _Yg, _Ben, _Gen, 
+_Yen, _Ren, _Colb, _Colr, _Coly, _Colg, _Colout, _Bdone, _Ydone, _Rdone, _Gdone, resetA, _clock, ballCol, _colSel);
+	
+	input enable, resetn, _clock, _Bdone, _Ydone, _Rdone, _Gdone, resetA, clock, _Ben, _Gen, _Yen, _Ren, _colSel;	
+	input [6:0] _Yr, _Yy, _Yb, _Yg;
+	input [7:0] _Xr, _Xy, _Xb, _Xg;
+	input [2:0] _Colb, _Colr, _Coly, _Colg, ballCol;
+	output reg [2:0] _Colout;
+	output reg [6:0] outy;
+	output reg [7:0] outx;
+	reg[6:0] outC;
+
+	
+	
+	always@(posedge _clock)
+	begin
+	if (resetn==1'b1)
+		outC <= 7'b1111000;
+	else if (resetA == 1'b1)
+		outC <= 7'b1111000;
+	else if (outC == 4'b1111)
+		outC <= 7'b0000;
+	else if (enable == 1'b1)
+		outC <= outC - 1;	
+	end
+	
+	always@(posedge clock)
+		begin
+		if (_Ben) 
+			begin
+				outx <= _Xb;
+				outy <= _Yb;
+				_Colout <= _Colb;
+			end
+		if (_Ren) 
+			begin
+				outx <= _Xr;
+				outy <= _Yr;
+				_Colout <= _Colr;
+			end
+		if (_Yen) 
+			begin
+				outx <= _Xy;
+				outy <= _Yy;
+				_Colout <= _Coly;
+			end
+		if (_Gen) 
+			begin
+				outx <= _Xg;
+				outy <= _Yg;
+				_Colout <= _Colg;
+			end
+		if (_Bdone && _Ydone && _Rdone && _Gdone)				
+			begin
+			if (resetA)
+				begin
+				outy <= 7'b1111000;
+				outx <= 8'b01010000;
+				end
+			if (resetn)
+				begin
+				outy <= 7'b1111000;
+				outx <= 8'b01010000;
+				end
+			if (enable == 1'b1)
+				begin
+				outx <= 8'b01010000; 
+				outy <= outC - 1;
+				_Colout <= (_colSel)?3'b000:ballCol[2:0];
+				end
+			end
+	 end	
+	 
+
+endmodule

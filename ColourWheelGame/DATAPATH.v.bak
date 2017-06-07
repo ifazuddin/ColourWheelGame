@@ -1,0 +1,47 @@
+swmodule datapath (colourValue,enableXC, enableYC,enableC, enableRateDiv, colSel,resetn,
+						xout, yout, colout,clock,resetAuto, 
+						fif_framesout, outxCoun, outyCoun,enablefif,resetEnable,_ben, 
+						_gen, _yen, _ren, _colb, _colr, _coly, _colg, _xr, _xy, _xb, _xg, _yr, _yy, 
+						_yb, _yg, _bdone, _ydone, _rdone, _gdone, _gameEn, ballC, newColEn);
+						
+		input [9:0]colourValue;
+		input resetEnable, _gameEn;
+		input enableXC, enableYC, enableC, colSel, resetn,clock, resetAuto,enableRateDiv, 
+		enablefif, _ben, _gen, _yen, _ren, _bdone, _ydone, _rdone, _gdone, newColEn;
+		input [7:0] _xr, _xy, _xb, _xg;
+		input [6:0] _yr, _yy, _yb, _yg;
+		output [7:0]xout;
+		output [6:0]yout;
+		output [2:0]colout, _colb, _colr, _coly, _colg, ballC;
+		
+		output [4:0]fif_framesout;
+		output [7:0]outxCoun;
+		output [6:0]outyCoun;
+		
+		wire [7:0]xcountout;
+		wire [6:0]ycountout;
+		wire fifteen_frames;
+		wire [3:0] rand_num;
+		wire [2:0] ball_colour;		
+		random_number_lfsr_4bit randn(clock, resetn, rand_num);
+		random_colour randc(clock, resetn, rand_num, ball_colour, newColEn); //fix
+		
+		assign ballC = ball_colour;
+		
+		ycounter ycc (enableYC, resetn, fifteen_frames, ycountout, xcountout, _xr, _xy,_xb, _xg, _yr, _yy, _yb,
+		_yg, _ben, _gen, _yen, _ren, _colb, _colr, _coly, _colg, colout, _bdone, _ydone, _rdone, _gdone, resetEnable, clock, ball_colour, colSel);
+			
+		assign xout = xcountout;
+		assign yout = ycountout; 
+		
+		wire outFromRateDiv;
+		
+		wire [19:0]outRate;
+		wire [4:0]fifOut;
+		sixty_h_div RD1 (clock, outFromRateDiv, outRate, resetn, resetAuto, enableRateDiv);
+		fif_frames F_F_1(outFromRateDiv, fifteen_frames, resetn, enablefif, resetAuto,fifOut);				
+		
+		assign fif_framesout = fifOut;
+		assign outxCoun = xcountout;
+		assign outyCoun = ycountout;
+endmodule

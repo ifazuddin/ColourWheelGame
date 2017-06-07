@@ -1,0 +1,4 @@
+Warning (10268): Verilog HDL information at FSM.v(32): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at FSM.v(260): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at FSM.v(334): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at ColourBall.v(151): always construct contains both blocking and non-blocking assignments

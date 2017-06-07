@@ -1,0 +1,357 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1100mV 85C Model Setup 'datapath:comb_4|sixty_h_div:RD1|out[0]'
+Slack : -5.315
+TNS   : -24.159
+
+Type  : Slow 1100mV 85C Model Setup 'fsm:comb_5|newColEn_'
+Slack : -5.129
+TNS   : -14.153
+
+Type  : Slow 1100mV 85C Model Setup 'fsm:comb_5|pres_s.state4'
+Slack : -4.905
+TNS   : -35.809
+
+Type  : Slow 1100mV 85C Model Setup 'datapath:comb_4|fif_frames:F_F_1|outF[0]'
+Slack : -4.801
+TNS   : -33.917
+
+Type  : Slow 1100mV 85C Model Setup 'CLOCK_50'
+Slack : -3.303
+TNS   : -572.497
+
+Type  : Slow 1100mV 85C Model Setup 'KEY[2]'
+Slack : -3.263
+TNS   : -19.678
+
+Type  : Slow 1100mV 85C Model Setup 'VGA|mypll|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 31.284
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Hold 'datapath:comb_4|sixty_h_div:RD1|out[0]'
+Slack : -0.707
+TNS   : -0.707
+
+Type  : Slow 1100mV 85C Model Hold 'CLOCK_50'
+Slack : -0.294
+TNS   : -0.693
+
+Type  : Slow 1100mV 85C Model Hold 'fsm:comb_5|pres_s.state4'
+Slack : 0.091
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Hold 'KEY[2]'
+Slack : 0.328
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Hold 'VGA|mypll|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.334
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Hold 'datapath:comb_4|fif_frames:F_F_1|outF[0]'
+Slack : 0.492
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Hold 'fsm:comb_5|newColEn_'
+Slack : 3.768
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'datapath:comb_4|fif_frames:F_F_1|outF[0]'
+Slack : -0.394
+TNS   : -5.619
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'datapath:comb_4|sixty_h_div:RD1|out[0]'
+Slack : -0.394
+TNS   : -3.139
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'KEY[2]'
+Slack : 0.049
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'fsm:comb_5|pres_s.state4'
+Slack : 0.333
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'fsm:comb_5|newColEn_'
+Slack : 0.421
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'VGA|mypll|altpll_component|auto_generated|generic_pll1~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.666
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 8.872
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'VGA|mypll|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 18.787
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Setup 'datapath:comb_4|sixty_h_div:RD1|out[0]'
+Slack : -5.376
+TNS   : -24.313
+
+Type  : Slow 1100mV 0C Model Setup 'fsm:comb_5|newColEn_'
+Slack : -5.217
+TNS   : -14.457
+
+Type  : Slow 1100mV 0C Model Setup 'fsm:comb_5|pres_s.state4'
+Slack : -5.021
+TNS   : -36.371
+
+Type  : Slow 1100mV 0C Model Setup 'datapath:comb_4|fif_frames:F_F_1|outF[0]'
+Slack : -4.908
+TNS   : -34.326
+
+Type  : Slow 1100mV 0C Model Setup 'KEY[2]'
+Slack : -3.305
+TNS   : -20.373
+
+Type  : Slow 1100mV 0C Model Setup 'CLOCK_50'
+Slack : -3.018
+TNS   : -490.062
+
+Type  : Slow 1100mV 0C Model Setup 'VGA|mypll|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 31.653
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Hold 'datapath:comb_4|sixty_h_div:RD1|out[0]'
+Slack : -0.632
+TNS   : -0.632
+
+Type  : Slow 1100mV 0C Model Hold 'CLOCK_50'
+Slack : -0.535
+TNS   : -2.123
+
+Type  : Slow 1100mV 0C Model Hold 'fsm:comb_5|pres_s.state4'
+Slack : 0.062
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Hold 'VGA|mypll|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.312
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Hold 'KEY[2]'
+Slack : 0.436
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Hold 'datapath:comb_4|fif_frames:F_F_1|outF[0]'
+Slack : 0.469
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Hold 'fsm:comb_5|newColEn_'
+Slack : 3.778
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'datapath:comb_4|fif_frames:F_F_1|outF[0]'
+Slack : -0.394
+TNS   : -5.670
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'datapath:comb_4|sixty_h_div:RD1|out[0]'
+Slack : -0.394
+TNS   : -3.244
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'KEY[2]'
+Slack : 0.076
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'fsm:comb_5|pres_s.state4'
+Slack : 0.337
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'fsm:comb_5|newColEn_'
+Slack : 0.434
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'VGA|mypll|altpll_component|auto_generated|generic_pll1~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.666
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 8.834
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'VGA|mypll|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 18.767
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Setup 'datapath:comb_4|sixty_h_div:RD1|out[0]'
+Slack : -3.096
+TNS   : -13.717
+
+Type  : Fast 1100mV 85C Model Setup 'datapath:comb_4|fif_frames:F_F_1|outF[0]'
+Slack : -2.840
+TNS   : -17.988
+
+Type  : Fast 1100mV 85C Model Setup 'fsm:comb_5|newColEn_'
+Slack : -2.571
+TNS   : -7.009
+
+Type  : Fast 1100mV 85C Model Setup 'CLOCK_50'
+Slack : -2.434
+TNS   : -421.131
+
+Type  : Fast 1100mV 85C Model Setup 'fsm:comb_5|pres_s.state4'
+Slack : -2.213
+TNS   : -16.175
+
+Type  : Fast 1100mV 85C Model Setup 'KEY[2]'
+Slack : -1.415
+TNS   : -7.304
+
+Type  : Fast 1100mV 85C Model Setup 'VGA|mypll|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 33.575
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Hold 'datapath:comb_4|sixty_h_div:RD1|out[0]'
+Slack : -0.515
+TNS   : -0.515
+
+Type  : Fast 1100mV 85C Model Hold 'fsm:comb_5|pres_s.state4'
+Slack : -0.007
+TNS   : -0.007
+
+Type  : Fast 1100mV 85C Model Hold 'KEY[2]'
+Slack : 0.065
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Hold 'CLOCK_50'
+Slack : 0.086
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Hold 'VGA|mypll|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.190
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Hold 'datapath:comb_4|fif_frames:F_F_1|outF[0]'
+Slack : 0.304
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Hold 'fsm:comb_5|newColEn_'
+Slack : 2.299
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'KEY[2]'
+Slack : -0.140
+TNS   : -1.239
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'datapath:comb_4|fif_frames:F_F_1|outF[0]'
+Slack : -0.045
+TNS   : -0.180
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'datapath:comb_4|sixty_h_div:RD1|out[0]'
+Slack : 0.013
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'fsm:comb_5|pres_s.state4'
+Slack : 0.359
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'fsm:comb_5|newColEn_'
+Slack : 0.457
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'VGA|mypll|altpll_component|auto_generated|generic_pll1~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.666
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 8.810
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'VGA|mypll|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 18.895
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Setup 'datapath:comb_4|sixty_h_div:RD1|out[0]'
+Slack : -2.925
+TNS   : -13.015
+
+Type  : Fast 1100mV 0C Model Setup 'datapath:comb_4|fif_frames:F_F_1|outF[0]'
+Slack : -2.668
+TNS   : -17.348
+
+Type  : Fast 1100mV 0C Model Setup 'fsm:comb_5|newColEn_'
+Slack : -2.487
+TNS   : -6.801
+
+Type  : Fast 1100mV 0C Model Setup 'fsm:comb_5|pres_s.state4'
+Slack : -2.075
+TNS   : -15.221
+
+Type  : Fast 1100mV 0C Model Setup 'CLOCK_50'
+Slack : -1.941
+TNS   : -318.880
+
+Type  : Fast 1100mV 0C Model Setup 'KEY[2]'
+Slack : -1.256
+TNS   : -6.506
+
+Type  : Fast 1100mV 0C Model Setup 'VGA|mypll|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 34.429
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Hold 'datapath:comb_4|sixty_h_div:RD1|out[0]'
+Slack : -0.482
+TNS   : -0.498
+
+Type  : Fast 1100mV 0C Model Hold 'CLOCK_50'
+Slack : -0.129
+TNS   : -0.333
+
+Type  : Fast 1100mV 0C Model Hold 'fsm:comb_5|pres_s.state4'
+Slack : -0.023
+TNS   : -0.023
+
+Type  : Fast 1100mV 0C Model Hold 'KEY[2]'
+Slack : 0.088
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Hold 'VGA|mypll|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 0.171
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Hold 'datapath:comb_4|fif_frames:F_F_1|outF[0]'
+Slack : 0.236
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Hold 'fsm:comb_5|newColEn_'
+Slack : 2.242
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'KEY[2]'
+Slack : -0.117
+TNS   : -1.134
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'datapath:comb_4|fif_frames:F_F_1|outF[0]'
+Slack : -0.008
+TNS   : -0.031
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'datapath:comb_4|sixty_h_div:RD1|out[0]'
+Slack : 0.035
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'fsm:comb_5|pres_s.state4'
+Slack : 0.381
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'fsm:comb_5|newColEn_'
+Slack : 0.461
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'VGA|mypll|altpll_component|auto_generated|generic_pll1~FRACTIONAL_PLL|vcoph[0]'
+Slack : 1.666
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'CLOCK_50'
+Slack : 8.804
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'VGA|mypll|altpll_component|auto_generated|generic_pll1~PLL_OUTPUT_COUNTER|divclk'
+Slack : 18.891
+TNS   : 0.000
+
+------------------------------------------------------------
